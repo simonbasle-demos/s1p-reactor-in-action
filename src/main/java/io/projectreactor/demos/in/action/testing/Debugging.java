@@ -27,6 +27,7 @@ public class Debugging {
 		ConfigurableApplicationContext ctx =
 				SpringApplication.run(InActionApplication.class, args);
 
+		//TODO run this and look at the error. Could it be improved?
 		ctx.getBean(Debugging.class)
 		   .numbers()
 		   .subscribe(System.out::println, e -> {

@@ -25,7 +25,8 @@ public class FluxSource {
 	public Flux<Integer> flux1() {
 		return Flux.just(1, 2, 0, 3, 4)
 		           .map(operation)
-		           .checkpoint("flux1", true);
+		           //TODO
+		 ;
 	}
 
 	@Conditional(Trigger2.class)
@@ -34,6 +35,7 @@ public class FluxSource {
 		return Flux.range(1, 10)
 		           .map(i -> 10 - i)
 		           .map(operation)
-		           .checkpoint("flux2");
+		           //TODO
+				;
 	}
 }

@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class Testing {
 
+	//TODO how to test Flux returned by methods in this class?
+
 	static final Set<String> NAMES = new LinkedHashSet<>(Arrays.asList(
 			"Victor","Simon","Rick","Morty","Beth","Jerry","Summer"
 	));

@@ -22,20 +22,15 @@ public class ClientExample {
 	private WebClient swapi = WebClient.create("http://swapi.co/api/");
 
 	private Flux<Map> findCharacters(String characterName) {
-		//noinspection unchecked
-		return swapi.get()
-		         .uri("/people/?search={charName}", characterName)
-		         .retrieve()
-		         .bodyToMono(Map.class)
+		//TODO get "/people/?search={charName}" and retrieve as a List<Map>,
+		return Mono.<Map>empty()//TODO use the WebClient instead
 		            .flatMapMany(results -> Flux.fromIterable(
 				            (List<Map>) results.get("results")));
 	}
 
 	private Mono<Map> getCharacter(int characterId) {
-		return swapi.get()
-		            .uri("/people/{id}", characterId)
-		            .retrieve()
-		            .bodyToMono(Map.class);
+		//TODO get "/people/{id}" as map
+		return Mono.empty();
 	}
 
 	private Flux<String> fetchMovieTitles(Map characterJson) {

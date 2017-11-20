@@ -1,5 +1,7 @@
 package io.projectreactor.demos.in.action.webflux;
 
+import java.util.List;
+
 import io.projectreactor.demos.in.action.testing.Testing;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,8 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author Simon Baslé
  */
-@RestController
-@RequestMapping("/api")
+//TODO make a rest controller mapping to root "/api"
 public class WebFluxController {
 
 	Testing service;
@@ -24,32 +25,37 @@ public class WebFluxController {
 		this.service = service;
 	}
 
-	@GetMapping("/numbers")
-	public Flux<Integer> numbers(@RequestParam(required = false) String operation) {
+	//TODO make endpoint "/numbers" with request param
+	public List<Integer> numbers(String operation) {
 		if (operation == null)
-			return service.tenToZero();
+			//TODO default to tenToZero
+			return null;
 
 		switch (operation) {
 			case "divide":
-				return service.tenToZero()
-				              .filter(i -> i != 0)
-				              .map(i -> 100 / i);
+				//TODO divide 100 by i (and prevent division from failing?)
+				return null;
 			case "multiply":
-				return service.operateOnTenToZero(i -> 100 * i);
+				//TODO multiply 100 by i
+				return null;
 			default:
 				throw new UnsupportedOperationException("Unknown operation \"" + operation + "\"," + " try \"divide\" or \"multiply\"");
 		}
 	}
 
-	@GetMapping("/numbers/{index}")
-	public Mono<Integer> number(@PathVariable int index) {
+	//TODO make endpoint "/numbers/{index}" with path variable
+	public Integer number(int index) {
 		return service.tenToZero()
-		              .elementAt(index);
+				//TODO replace
+				.blockLast()
+				;
 	}
 
-	@GetMapping(value = "/names", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-	public Flux<String> names() {
-		return service.namesPerSecond();
+	//TODO make endpoint "/names" that streams from service.namesPerSecond()
+	public String names() {
+		return service.namesPerSecond()
+				.blockLast() //TODO fix
+				;
 	}
 
 }
